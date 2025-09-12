@@ -16,7 +16,8 @@ def viewUser():
     if userdata ==[]:
         print("No any user found")
     else:
-         print(userdata)
+         for user in userdata:
+            print(f"i am called: {user}")
 
 def deleteUser():
     print("-------User Details-------")
@@ -38,9 +39,25 @@ def deleteUser():
     else:
          print(f"Error: {message}")
 
-def main():
-     deleteUser()
+# class deleteUsers:
 
-if __name__ == "__main__":
-     main()
-    
+def menuSelelction():
+    selectMenu = input("Please choose between 1 to 4: ")
+    if selectMenu not in ("1", "2", "3", "4"):
+        print("Please choose between 1 to 4 only")
+    if selectMenu == "1":
+        deleteUser()
+    elif selectMenu == "2":
+        print("Car added")
+    elif selectMenu == "3":
+        print("Car deleted")
+    elif selectMenu == "4":
+        print("Car Rent Approved")
+
+def adminMenu():
+    print("1. Delete Users")
+    print("2. Add Cars")
+    print("3. Delete Cars")
+    print("4. Aprove Rent")
+    # adminMenu()
+    menuSelelction()

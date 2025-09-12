@@ -1,7 +1,7 @@
 from database.database import create_table
 from userManage.userManage import add_user, view_users
-from login import loginDetail
-from signup import userDetail
+from login_signup.login import loginDetail
+from login_signup.signup import userDetail
 
 def userMenu():
     ## options for user to select where to rediirect

@@ -1,4 +1,5 @@
 from userManage.userManage import userLogin
+from admin.admin import adminMenu
 class loginUser:
     def __init__(self, email, password):
         self._email=email
@@ -21,6 +22,7 @@ class loginUser:
                 if data[4]=="admin":
                     print(data)
                     print("I am admin")
+                    adminMenu()
                 elif data[4]=="customer":
                     print("I am customer")
             else:
@@ -35,4 +37,7 @@ def loginDetail():
     loginClass = loginUser(email, password)
     # loginClass.validation(confirmation)
     is_valid, message = loginClass.validation(confirmation)
-    loginClass.userSearch(is_valid, message)
+    if confirmation not in ("n", "No", "no", "N"):
+        loginClass.userSearch(is_valid, message)
+    else:
+        return False

@@ -1,6 +1,6 @@
 from database.database import create_table
 from userManage.userManage import add_user, view_users
-from login import loginDetail
+from login_signup.login import loginDetail
 import re
 class person:
     def __init__(self, fname, lname, pnumber, role, email, password):
