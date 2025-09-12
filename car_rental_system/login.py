@@ -16,11 +16,17 @@ class loginUser:
         if is_valid:
             # print(message)
             data = userLogin(self._email, self.__password) ## will search on database
-            # print(data)
-            if data:
-               print("Successfully Login")
+            # print(f"i am called: {data}")
+            if data!=None:
+                if data[4]=="admin":
+                    print(data)
+                    print("I am admin")
+                elif data[4]=="customer":
+                    print("I am customer")
             else:
                 print("Please enter correct credentials")
+            # else:
+                
     
 def loginDetail():
     email = input("Please enter your email: ")

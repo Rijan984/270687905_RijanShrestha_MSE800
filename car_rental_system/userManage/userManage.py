@@ -28,3 +28,15 @@ def view_users():
     rows = cursor.fetchall()
     conn.close()
     return rows
+
+def delete_user(user_id):
+    conn = create_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM userRegister WHERE user_id = ?", (user_id,))
+    if cursor.rowcount == 0:   # ✅ no rows affected means ID not found
+        print("❌ No user found with that ID.")
+    else:
+        conn.commit()
+        print("🗑️ User deleted.")
+    
+    conn.close()
