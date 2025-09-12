@@ -19,5 +19,17 @@ def create_table():
             password Text NOT NULL
         )
     ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS carDetails (
+            car_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            model TEXT NOT NULL,
+            year TEXT NOT NULL,
+            mileage TEXT NOT NULL,
+            availability TEXT NOT NULL,
+            min_rent_period TEXT NOT NULL,
+            max_rent_period Text NOT NULL
+        )
+    ''')
     conn.commit()
     conn.close()

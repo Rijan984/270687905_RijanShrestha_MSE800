@@ -1,5 +1,5 @@
 from userManage.userManage import view_users, delete_user
-
+from admin.carDetail.car import addCarDetail
 def validation(confirmation, userId):
         if confirmation not in ("y", "n", "Y", "N", "Yes", "No"):
             return False, "Please enter Yes/No"
@@ -48,7 +48,8 @@ def menuSelelction():
     if selectMenu == "1":
         deleteUser()
     elif selectMenu == "2":
-        print("Car added")
+        print("Adding Car")
+        addCarDetail()
     elif selectMenu == "3":
         print("Car deleted")
     elif selectMenu == "4":
@@ -57,7 +58,8 @@ def menuSelelction():
 def adminMenu():
     print("1. Delete Users")
     print("2. Add Cars")
-    print("3. Delete Cars")
-    print("4. Aprove Rent")
+    print("3. View Cars")
+    print("4. Delete Cars")
+    print("5. Aprove Rent")
     # adminMenu()
     menuSelelction()
