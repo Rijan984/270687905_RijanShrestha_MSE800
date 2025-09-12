@@ -1,4 +1,4 @@
-from userManage import userLogin
+from userManage.userManage import userLogin
 class loginUser:
     def __init__(self, email, password):
         self._email=email

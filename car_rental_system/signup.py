@@ -1,5 +1,5 @@
 from database.database import create_table
-from userManage import add_user, view_users
+from userManage.userManage import add_user, view_users
 from login import loginDetail
 import re
 class person:
