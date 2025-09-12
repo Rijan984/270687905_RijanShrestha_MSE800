@@ -1,5 +1,5 @@
 from userManage.userManage import view_users, delete_user
-from admin.carDetail.car import addCarDetail
+from admin.carDetail.car import addCarDetail, viewCars, deleteCar
 def validation(confirmation, userId):
         if confirmation not in ("y", "n", "Y", "N", "Yes", "No"):
             return False, "Please enter Yes/No"
@@ -40,26 +40,39 @@ def deleteUser():
          print(f"Error: {message}")
 
 # class deleteUsers:
-
 def menuSelelction():
-    selectMenu = input("Please choose between 1 to 4: ")
-    if selectMenu not in ("1", "2", "3", "4"):
-        print("Please choose between 1 to 4 only")
-    if selectMenu == "1":
-        deleteUser()
-    elif selectMenu == "2":
-        print("Adding Car")
-        addCarDetail()
-    elif selectMenu == "3":
-        print("Car deleted")
-    elif selectMenu == "4":
-        print("Car Rent Approved")
-
-def adminMenu():
     print("1. Delete Users")
     print("2. Add Cars")
     print("3. View Cars")
     print("4. Delete Cars")
     print("5. Aprove Rent")
+    print("6. Exit")
     # adminMenu()
-    menuSelelction()
+
+
+def adminMenu():
+    while True:
+        menuSelelction()
+        selectMenu = input("Please choose between 1 to 6: ")
+        if selectMenu not in ("1", "2", "3", "4", "5", "6"):
+            print("Please choose between 1 to 6 only")
+        if selectMenu == "1":
+            deleteUser()
+        elif selectMenu == "2":
+            print("-----Adding Car-----")
+            addCarDetail()
+        elif selectMenu == "3":
+            print("-----Car Details-----")
+            carData = viewCars()
+            if carData == None:
+                print("No car available")
+            else:
+                print(carData)
+        elif selectMenu == "4":
+            print("-----Deleting Car-----")
+            deleteCar()
+        elif selectMenu == "5":
+            print("Rent Approved")
+        elif selectMenu == "6":
+            print("Exiting...")
+            break

@@ -34,9 +34,9 @@ def delete_car(car_id):
     cursor = conn.cursor()
     cursor.execute("DELETE FROM carDetails WHERE car_id = ?", (car_id,))
     if cursor.rowcount == 0:   # ✅ no rows affected means ID not found
-        print("❌ No user found with that ID.")
+        print("❌ No car found with that ID.")
     else:
         conn.commit()
-        print("🗑️ User deleted.")
+        print("🗑️ Car deleted.")
     
     conn.close()
