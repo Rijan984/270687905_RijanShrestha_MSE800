@@ -24,9 +24,10 @@ def carDetails():
     model = input("Please enter the model of the car: ")
     year = input("Please enter the year of the car: ")
     mileage = input("Please enter the mileage of the car: ")
-    availability = input("Please enter the availability of the car: ")
+    availability = input("Please enter the availability of the car (yes/no): ")
     min_rent_period = input("Please enter the minimun rent period of the car: ")
     max_rent_period = input("Please enter the maximum rent period of the car: ")
+    # car_booking = "Ready for booking"
     # confirmation = input("Are you sure you want too add car?: ")
     
     #passing the variables to class carData

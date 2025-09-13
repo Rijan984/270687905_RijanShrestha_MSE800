@@ -5,13 +5,24 @@ def add_car(model, year, mileage, available_now, min_rent_period, max_rent_perio
     conn = create_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("INSERT INTO carDetails (model, year, mileage, available_now, min_rent_period, max_rent_period) VALUES (?, ?, ?, ?, ?, ?)", (model, year, mileage, available_now, min_rent_period, max_rent_period)
-        )
+        cursor.execute("INSERT INTO carDetails (model, year, mileage, availability, min_rent_period, max_rent_period) VALUES (?, ?, ?, ?, ?, ?)", (model, year, mileage, available_now, min_rent_period, max_rent_period))
         conn.commit()
         print("Car added successfully")
-    except sqlite3.IntegrityError:
-        print("Car Addition failed")
+    except sqlite3.IntegrityError as e:
+        print(f"Car Addition failed: {e}")
     conn.close()
+
+# def update_car():
+#     conn = create_connection()
+#     cursor = conn.cursor()
+#     try: 
+#         cursor.execute("UPDATE users SET model = ? WHERE carID = ?", (model, availability, carId))
+#         conn.commit()
+#         print(f"User {name}'s email updated successfully.")
+#     except sqlite3.IntegrityError:
+#         print("Error: Email must be unique.")
+#     finally:
+#         conn.close()
 
 # def userLogin(email, password):
 #     conn = create_connection()
