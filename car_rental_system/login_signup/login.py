@@ -14,6 +14,7 @@ class loginUser:
             return False, "Please enter all the login details"
         return True, "Successfully validate"
     def userSearch(self, is_valid, message):
+        user_id = 0
         if not is_valid:
             print(message)
         if is_valid:
@@ -22,19 +23,24 @@ class loginUser:
                 superAdminMenu() 
             else:
                 data = userLogin(self._email, self.__password) ## will search on database
-                # print(f"i am called: {data}")
+                print(f"i am called: {data}")
                 if data!=None:
+                    user_id == data[0]
                     if data[4]=="admin":
                         print(data)
                         print("I am admin")
-                        adminMenu()
+                        # loginUser.userId(user_id)
+                        adminMenu(data)
                     elif data[4]=="customer":
                         print("-----Customer Menu-----")
-                        runCustomerMenu()
+                        # loginUser.userId(user_id)
+                        runCustomerMenu(data)
 
                 else:
                     print("Please enter correct credentials")
             # else:
+    def userId(self, user_id):
+        return user_id
                 
     
 def loginDetail():
