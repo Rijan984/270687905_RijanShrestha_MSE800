@@ -42,30 +42,35 @@ def deleteUser():
 
 def menuSelelction():
     print("---------- I Am Super Admin ----------")
-    print("1. Delete Users")
-    print("2. View Cars")
-    print("3. Delete Cars")
-    print("4. Exit")
+    print("1. View Users")
+    print("2. Delete Users")
+    print("3. View Cars")
+    print("4. Delete Cars")
+    print("5. Exit")
 
 
 def superAdminMenu():
     while True:
         menuSelelction()
         selectMenu = input("Please choose between 1 to 4: ")
-        if selectMenu not in ("1", "2", "3", "4"):
+        if selectMenu not in ("1", "2", "3", "4", "5"):
             print("Please choose between 1 to 4 only")
         if selectMenu == "1":
-            deleteUser()
+            users = view_users()
+            for user in users:
+                print(f"i am called: {user}")
         elif selectMenu == "2":
+            deleteUser()
+        elif selectMenu == "3":
             print("-----Car Details-----")
             carData = viewCars()
             if carData == None:
                 print("No car available")
             else:
                 print(carData)
-        elif selectMenu == "3":
+        elif selectMenu == "4":
             print("-----Deleting Car-----")
             deleteCar()
-        elif selectMenu == "4":
+        elif selectMenu == "5":
             print("Exiting...")
             break
