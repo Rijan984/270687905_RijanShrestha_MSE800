@@ -1,5 +1,6 @@
 from userManage.userManage import userLogin
 from admin.admin import adminMenu
+from admin.superAdmin import superAdminMenu
 class loginUser:
     def __init__(self, email, password):
         self._email=email
@@ -15,18 +16,21 @@ class loginUser:
         if not is_valid:
             print(message)
         if is_valid:
-            # print(message)
-            data = userLogin(self._email, self.__password) ## will search on database
-            # print(f"i am called: {data}")
-            if data!=None:
-                if data[4]=="admin":
-                    print(data)
-                    print("I am admin")
-                    adminMenu()
-                elif data[4]=="customer":
-                    print("I am customer")
+            # if super admin will redirect to superAdmin pannel if not then will redirect according to the role of the user
+            if self._email == "admin" and self.__password == "admin":
+                superAdminMenu() 
             else:
-                print("Please enter correct credentials")
+                data = userLogin(self._email, self.__password) ## will search on database
+                # print(f"i am called: {data}")
+                if data!=None:
+                    if data[4]=="admin":
+                        print(data)
+                        print("I am admin")
+                        adminMenu()
+                    elif data[4]=="customer":
+                        print("I am customer")
+                else:
+                    print("Please enter correct credentials")
             # else:
                 
     
@@ -35,7 +39,7 @@ def loginDetail():
     password = input("Please enter your password: ")
     confirmation = input("Do you want to continue(y/n): ")
     loginClass = loginUser(email, password)
-    # loginClass.validation(confirmation)
+    
     is_valid, message = loginClass.validation(confirmation)
     if confirmation not in ("n", "No", "no", "N"):
         loginClass.userSearch(is_valid, message)

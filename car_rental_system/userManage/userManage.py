@@ -10,7 +10,7 @@ def add_user(fname, lname, pnumber, role, email, password):
         conn.commit()
         print("User added successfully")
     except sqlite3.IntegrityError:
-        print("Email must be unique")
+        print("❌ Email must be unique")
     conn.close()
 
 def userLogin(email, password):

@@ -11,10 +11,10 @@ class addCarData:
 
     def validation(self):
         if not self.model or not self.year or not self.mileage or not self.availability or not self.min_rent_period or not self.max_rent_period:
-            return False, "Please enter all the details"
+            return False, "-----> Please enter all the details"
         if self.availability not in ("yes", "no"):
             print(self.availability)
-            return False, "Please enter only yes or no"
+            return False, "-----> Please enter only yes or no"
         return True, "Validation Successful"
     def addCar(self):
         add_car(self.model, self.year, self.mileage, self.availability, self.min_rent_period, self.max_rent_period) #adding data to database        
@@ -51,5 +51,11 @@ def viewCars():
 # function to delete car from database
 def deleteCar():
     viewCars()
-    carId = int(input("Please enter car ID you want to delete"))
-    delete_car(carId) #passing ID to delete car from database
+    carId = input("Please enter car ID you want to delete: ")
+    if len(carId) > 0:
+        if any(char.isalpha() for char in carId):
+            print("❌ Please enter only numbers")
+        else:
+            delete_car(carId) #passing ID to delete car from database
+    else:
+        print("❌ Please enter car ID to delete: ")
