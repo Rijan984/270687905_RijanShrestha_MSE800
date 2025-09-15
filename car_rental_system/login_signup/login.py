@@ -1,6 +1,7 @@
 from userManage.userManage import userLogin
 from admin.admin import adminMenu
 from admin.superAdmin import superAdminMenu
+from customer.customer import runCustomerMenu
 class loginUser:
     def __init__(self, email, password):
         self._email=email
@@ -28,7 +29,9 @@ class loginUser:
                         print("I am admin")
                         adminMenu()
                     elif data[4]=="customer":
-                        print("I am customer")
+                        print("-----Customer Menu-----")
+                        runCustomerMenu()
+
                 else:
                     print("Please enter correct credentials")
             # else:

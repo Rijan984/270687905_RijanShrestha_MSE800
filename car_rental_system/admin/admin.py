@@ -1,5 +1,6 @@
 from userManage.userManage import view_users, delete_user
 from admin.carDetail.car import addCarDetail, viewCars, deleteCar
+from admin.carDetail.carManage import view_cars
 def validation(confirmation, userId):
         if confirmation not in ("y", "n", "Y", "N", "Yes", "No"):
             return False, "Please enter Yes/No"
@@ -43,37 +44,39 @@ def deleteUser():
 # class deleteUsers:
 def menuSelelction():
     # print("1. Delete Users")
-    print("2. Add Cars")
-    print("3. View Cars")
-    print("4. Delete Cars")
-    print("5. Aprove Rent")
-    print("6. Exit")
+    print("1. Add Cars")
+    print("2. View Cars")
+    print("3. Delete Cars")
+    print("4. Aprove Rent")
+    print("5. Exit")
     # adminMenu()
 
 
 def adminMenu():
     while True:
         menuSelelction()
-        selectMenu = input("Please choose between 1 to 6: ")
-        if selectMenu not in ("1", "2", "3", "4", "5", "6"):
-            print("Please choose between 1 to 6 only")
+        selectMenu = input("Please choose between 1 to 5: ")
+        if selectMenu not in ("1", "2", "3", "4", "5"):
+            print("Please choose between 1 to 5 only")
+        # if selectMenu == "1":
+        #     deleteUser()
         if selectMenu == "1":
-            deleteUser()
-        elif selectMenu == "2":
             print("-----Adding Car-----")
             addCarDetail()
-        elif selectMenu == "3":
-            print("-----Car Details-----")
-            carData = viewCars()
-            if carData == None:
+        elif selectMenu == "2":
+            print("-----Car Detailssssss-----")
+            car = view_cars()
+            if len(car) < 1:
+                print(f"i am testing: {carData}")
                 print("No car available")
             else:
-                print(carData)
-        elif selectMenu == "4":
+                for carData in car:
+                    print(carData)
+        elif selectMenu == "3":
             print("-----Deleting Car-----")
             deleteCar()
-        elif selectMenu == "5":
+        elif selectMenu == "4":
             print("Rent Approved")
-        elif selectMenu == "6":
+        elif selectMenu == "5":
             print("Exiting...")
             break

@@ -46,7 +46,7 @@ def addCarDetail():
 def viewCars():
         cars = view_cars()
         for car in cars:
-            print(car)
+            return car
 
 # function to delete car from database
 def deleteCar():

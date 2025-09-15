@@ -37,8 +37,13 @@ def view_cars():
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM carDetails")
     rows = cursor.fetchall()
+    # if len(rows) > 0: 
     conn.close()
+        # for availability in rows:
+        #     print(availability[4])
     return rows
+    # else:
+    #     print("-----No Car Aavailable-----")
 
 def delete_car(car_id):
     conn = create_connection()
