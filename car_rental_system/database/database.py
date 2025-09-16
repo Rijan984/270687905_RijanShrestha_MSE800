@@ -30,7 +30,8 @@ def create_table():
             min_rent_period TEXT NOT NULL,
             max_rent_period Text NOT NULL,
             bookingStatus Text NOT NULL,
-            admin_id INTEGER NOT NULL
+            admin_id INTEGER NOT NULL,
+            bookedBy Text NOT NULL
         )
     ''')
     conn.commit()

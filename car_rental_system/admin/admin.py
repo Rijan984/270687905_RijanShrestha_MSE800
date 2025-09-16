@@ -1,6 +1,6 @@
 from userManage.userManage import view_users, delete_user
 from admin.carDetail.car import addCarDetail, viewCars, deleteCar
-from admin.carDetail.carManage import view_cars
+from admin.carDetail.carManage import view_cars, update_car
 
 
 def validation(confirmation, userId):
@@ -49,11 +49,35 @@ def aprove_car_rent(data):
             print("No car available")
         else:
             for carData in car:
-                if carData[8]==data[0]:
-                    if carData[7] == "pending":
-                        print(carData)
-                    elif carData[7] == "available":
-                        print("No any request for booking")
+                # if carData[8]==data[0]:
+                if carData[7] == "pending":
+                    print(carData)
+                elif carData[7] == "available":
+                    print("No any request for booking")
+
+# def updateCar_validation(car_id, new_model, new_year, new_mileage, new_availability, new_min_rent_period, new_max_rent_period, new_bookingStatus):
+#         # if not new_model or not new_year or not new_mileage or not new_availability or not new_min_rent_period or not new_max_rent_period:
+#         #     return False, "-----> Please enter all the details"
+#         if new_availability not in ("yes", "no"):
+#             print(new_availability)
+#             return False, "-----> Please enter only yes or no"
+#         return True, "Validation Successful"
+def updateCar():
+    car_id = input("Please enter the id of the car you want to update: ")
+    new_model = input("Please enter the model of the car: ")
+    new_year = input("Please enter the year of the car: ")
+    new_mileage = input("Please enter the mileage of the car: ")
+    new_availability = input("Please enter the availability of the car (yes/no): ")
+    new_min_rent_period = input("Please enter the minimun rent period of the car: ")
+    new_max_rent_period = input("Please enter the maximum rent period of the car: ")
+    new_bookingStatus = "available"
+    
+    update_car(car_id, new_model, new_year, new_mileage, new_availability, new_min_rent_period, new_max_rent_period, new_bookingStatus)
+    # is_valid, message = updateCar_validation(car_id, new_model, new_year, new_mileage, new_availability, new_min_rent_period, new_max_rent_period, new_bookingStatus) ## will store boolean(True or false) in is_valid and in another message will be stored
+    # if not is_valid:
+    #     print(f"Error: {message}")
+    # if is_valid:
+    #     update_car()
 
 # class deleteUsers:
 def menuSelelction(data):
@@ -63,15 +87,16 @@ def menuSelelction(data):
     print("3. Delete Cars")
     print("4. Aprove Rent")
     print("5. Exit")
+    print("6. Update Car details")
     # adminMenu()
 
 
 def adminMenu(data):
     while True:
         menuSelelction(data)
-        selectMenu = input("Please choose between 1 to 5: ")
-        if selectMenu not in ("1", "2", "3", "4", "5"):
-            print("Please choose between 1 to 5 only")
+        selectMenu = input("Please choose between 1 to 6: ")
+        if selectMenu not in ("1", "2", "3", "4", "5", "6"):
+            print("Please choose between 1 to 6 only")
         # if selectMenu == "1":
         #     deleteUser()
         if selectMenu == "1":
@@ -84,8 +109,8 @@ def adminMenu(data):
                 print("No car available")
             else:
                 for carData in car:
-                    if carData[8]==data[0]:
-                        print(carData)
+                    # if carData[8]==data[0]:
+                    print(carData)
         elif selectMenu == "3":
             print("-----Deleting Car-----")
             deleteCar()
@@ -94,3 +119,8 @@ def adminMenu(data):
         elif selectMenu == "5":
             print("Exiting...")
             break
+        elif selectMenu == "6":
+            car = view_cars()
+            for carData in car:
+                print(carData)
+            updateCar()
