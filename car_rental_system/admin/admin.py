@@ -1,6 +1,8 @@
 from userManage.userManage import view_users, delete_user
 from admin.carDetail.car import addCarDetail, viewCars, deleteCar
 from admin.carDetail.carManage import view_cars
+
+
 def validation(confirmation, userId):
         if confirmation not in ("y", "n", "Y", "N", "Yes", "No"):
             return False, "Please enter Yes/No"
@@ -41,9 +43,21 @@ def deleteUser():
     else:
          print(f"Error: {message}")
 
+def aprove_car_rent(data):
+        car = view_cars()
+        if len(car) < 1:
+            print("No car available")
+        else:
+            for carData in car:
+                if carData[8]==data[0]:
+                    if carData[7] == "pending":
+                        print(carData)
+                    elif carData[7] == "available":
+                        print("No any request for booking")
+
 # class deleteUsers:
-def menuSelelction():
-    # print("1. Delete Users")
+def menuSelelction(data):
+    print(f"Welcome {data[1].capitalize()} {data[2].capitalize()}")
     print("1. Add Cars")
     print("2. View Cars")
     print("3. Delete Cars")
@@ -52,9 +66,9 @@ def menuSelelction():
     # adminMenu()
 
 
-def adminMenu():
+def adminMenu(data):
     while True:
-        menuSelelction()
+        menuSelelction(data)
         selectMenu = input("Please choose between 1 to 5: ")
         if selectMenu not in ("1", "2", "3", "4", "5"):
             print("Please choose between 1 to 5 only")
@@ -62,21 +76,21 @@ def adminMenu():
         #     deleteUser()
         if selectMenu == "1":
             print("-----Adding Car-----")
-            addCarDetail()
+            addCarDetail(data)
         elif selectMenu == "2":
             print("-----Car Detailssssss-----")
             car = view_cars()
             if len(car) < 1:
-                print(f"i am testing: {carData}")
                 print("No car available")
             else:
                 for carData in car:
-                    print(carData)
+                    if carData[8]==data[0]:
+                        print(carData)
         elif selectMenu == "3":
             print("-----Deleting Car-----")
             deleteCar()
         elif selectMenu == "4":
-            print("Rent Approved")
+            aprove_car_rent(data)
         elif selectMenu == "5":
             print("Exiting...")
             break

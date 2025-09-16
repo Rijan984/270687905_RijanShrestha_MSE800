@@ -8,7 +8,7 @@ class loginUser:
         self.__password=password
 
     def validation(self, confirmation):
-        if confirmation not in ("y", "n", "Y", "N", "Yes", "No"):
+        if confirmation not in ("y", "n", "Y", "N", "Yes", "No", "yes", "no", "YES", "NO"):
             return False, "Please enter Yes/No"
         if not self._email or not self.__password:
             return False, "Please enter all the login details"
@@ -17,7 +17,7 @@ class loginUser:
         user_id = 0
         if not is_valid:
             print(message)
-        if is_valid:
+        elif is_valid:
             # if super admin will redirect to superAdmin pannel if not then will redirect according to the role of the user
             if self._email == "admin" and self.__password == "admin":
                 superAdminMenu() 

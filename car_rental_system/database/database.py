@@ -28,7 +28,9 @@ def create_table():
             mileage TEXT NOT NULL,
             availability TEXT NOT NULL,
             min_rent_period TEXT NOT NULL,
-            max_rent_period Text NOT NULL
+            max_rent_period Text NOT NULL,
+            bookingStatus Text NOT NULL,
+            admin_id INTEGER NOT NULL
         )
     ''')
     conn.commit()

@@ -1,11 +1,11 @@
 from database.database import create_connection
 import sqlite3
 
-def add_car(model, year, mileage, available_now, min_rent_period, max_rent_period):
+def add_car(model, year, mileage, available_now, min_rent_period, max_rent_period, bookingStatus, admin_id):
     conn = create_connection()
     cursor = conn.cursor()
     try:
-        cursor.execute("INSERT INTO carDetails (model, year, mileage, availability, min_rent_period, max_rent_period) VALUES (?, ?, ?, ?, ?, ?)", (model, year, mileage, available_now, min_rent_period, max_rent_period))
+        cursor.execute("INSERT INTO carDetails (model, year, mileage, availability, min_rent_period, max_rent_period, bookingStatus, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (model, year, mileage, available_now, min_rent_period, max_rent_period, bookingStatus, admin_id))
         conn.commit()
         print("Car added successfully")
     except sqlite3.IntegrityError as e:

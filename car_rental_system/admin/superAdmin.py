@@ -52,7 +52,7 @@ def menuSelelction():
 def superAdminMenu():
     while True:
         menuSelelction()
-        selectMenu = input("Please choose between 1 to 4: ")
+        selectMenu = input("Please choose between 1 to 5: ")
         if selectMenu not in ("1", "2", "3", "4", "5"):
             print("Please choose between 1 to 4 only")
         if selectMenu == "1":
