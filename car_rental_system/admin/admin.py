@@ -16,7 +16,7 @@ def validation(confirmation, userId):
 
 def viewUser():
     userdata = view_users()
-    if userdata ==[]:
+    if len(userdata) < 1:
         print("❌ No any user found")
     else:
          for user in userdata:
@@ -119,6 +119,9 @@ def adminMenu(data):
         elif selectMenu == "2":
             print("-----Car Detailssssss-----")
             car = view_cars()
+            # carData = [item[8] for item in car]
+            # print(data[0])
+            # print(carData)
             if len(car) < 1:
                 print("No car available")
             else:

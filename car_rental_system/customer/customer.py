@@ -1,5 +1,6 @@
 from admin.carDetail.carManage import view_cars
 from customer.customerManage import bookCar_customer, cancel_booking
+from admin.carDetail.carManage import search_user
 class customer:
     def __init__(self, choice, data):
         self.choice = choice
@@ -19,26 +20,31 @@ class customer:
         else:
             print("No any cars are available")
 
-    def validation(confirmation, car_id):
+    def validation(confirmation, car_id, duration):
         if confirmation not in ("y", "n", "Y", "N", "Yes", "No", "yes", "no", "YES", "NO"):
             return False, "Please enter Yes/No"
         if confirmation == ("n", "no", "No", "NO"):
             return False, "Exiting..."
         if not car_id:
             return False, "Please enter car ID"
+        if not duration:
+            return False, "Please enter for howmany days you need car"
         # if isinstance(userId, str):
         #     return False, "Please enter number only"
         if car_id.isdigit() == False:
+            return False, "❌ Please enter number only"
+        if duration.isdigit() == False:
             return False, "❌ Please enter number only"
         return True, "Successfully validate"
     
     def carBooking(self, data):
         car_id = input("Please enter the id of car you want to book: ")
+        rentDuration = input("For howmany days you want to rent a car: ")
         confirmation = input("Are you sure (y/n): ")
         # if car_id
-        is_valid, message = customer.validation(confirmation, car_id) ## storing message and boolean
+        is_valid, message = customer.validation(confirmation, car_id, rentDuration) ## storing message and boolean
         if is_valid:
-            bookCar_customer(data, car_id)
+            bookCar_customer(data, car_id, rentDuration)
         else:
             print(f"Error: {message}")
     def bookedCars(self):
@@ -82,11 +88,19 @@ def customerChoice(data):
         elif choice == "2":
             print("------ Book a car -----")
             car = view_cars()
+            availableCar = []
             if len(car) > 0:
                 for cars in car:
                     if cars[4].lower() == "yes":
                         print(cars)
-                        customerChoice.carBooking(data)
+                        availableCar.append(cars)
+                        # print(f"I am availableCar: {availableCar}")
+                        # customerChoice.carBooking(data)
+                if availableCar==[]:
+                    print("No any car available for booking")
+                elif availableCar!=[]:
+                    customerChoice.carBooking(data)
+
             else:
                 print("No any car available for booking")
         elif choice == "3":

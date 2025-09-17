@@ -18,12 +18,11 @@ class loginUser:
         if not is_valid:
             print(message)
         elif is_valid:
-            # if super admin will redirect to superAdmin pannel if not then will redirect according to the role of the user
+            # if super admin, system will redirect to superAdmin pannel if not then will redirect according to the role of the user
             if self._email == "admin" and self.__password == "admin":
                 superAdminMenu() 
             else:
                 data = userLogin(self._email, self.__password) ## will search on database
-                print(f"i am called: {data}")
                 if data!=None:
                     user_id == data[0]
                     if data[4]=="admin":
