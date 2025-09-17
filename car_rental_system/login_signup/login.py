@@ -27,8 +27,7 @@ class loginUser:
                 if data!=None:
                     user_id == data[0]
                     if data[4]=="admin":
-                        print(data)
-                        print("I am admin")
+                        # print(data)
                         # loginUser.userId(user_id)
                         adminMenu(data)
                     elif data[4]=="customer":

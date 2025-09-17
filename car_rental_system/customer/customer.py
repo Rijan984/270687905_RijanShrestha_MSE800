@@ -7,18 +7,23 @@ class customer:
     def viewAvailableCars(self):
         print("----- Available Cars -----")
         rows = view_cars()
+        availableCar = ""
         if len(rows) > 0:
             for availability in rows:
-                if availability[4] == "yes":
+                if availability[4].lower() == "yes":
+                    availableCar = availability
                     print(availability)
-                else:
-                    print("No any cars are available")
+            if availableCar == "":
+                print("No any cars are available")
+            
         else:
             print("No any cars are available")
 
     def validation(confirmation, car_id):
         if confirmation not in ("y", "n", "Y", "N", "Yes", "No", "yes", "no", "YES", "NO"):
             return False, "Please enter Yes/No"
+        if confirmation == ("n", "no", "No", "NO"):
+            return False, "Exiting..."
         if not car_id:
             return False, "Please enter car ID"
         # if isinstance(userId, str):
@@ -75,14 +80,13 @@ def customerChoice(data):
         if choice == "1":
             customerChoice.viewAvailableCars()
         elif choice == "2":
-            print("book a car")
+            print("------ Book a car -----")
             car = view_cars()
             if len(car) > 0:
                 for cars in car:
-                    if cars[4] == "yes":
+                    if cars[4].lower() == "yes":
+                        print(cars)
                         customerChoice.carBooking(data)
-                    else:
-                        print("No any car available for booking")
             else:
                 print("No any car available for booking")
         elif choice == "3":

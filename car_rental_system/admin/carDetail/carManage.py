@@ -112,3 +112,14 @@ def delete_car(car_id):
         print("🗑️ Car deleted.")
     
     conn.close()
+
+def approveCarRent(car_id):
+    conn = create_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("UPDATE carDetails SET bookingStatus = ? WHERE car_id = ?", ("approved", car_id))
+        conn.commit()
+        print("Request approved")
+    except sqlite3.IntegrityError as e:
+        print(f"Booking Failed: {e}")
+    conn.close()

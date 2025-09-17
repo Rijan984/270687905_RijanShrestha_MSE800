@@ -58,7 +58,8 @@ def superAdminMenu():
         if selectMenu == "1":
             users = view_users()
             for user in users:
-                print(f"i am called: {user}")
+                print("----- Here are the list of the users -----")
+                print(user)
         elif selectMenu == "2":
             deleteUser()
         elif selectMenu == "3":
