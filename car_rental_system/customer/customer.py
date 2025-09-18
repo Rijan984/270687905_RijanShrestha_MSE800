@@ -1,6 +1,6 @@
 from admin.carDetail.carManage import view_cars
 from customer.customerManage import bookCar_customer, cancel_booking
-from admin.carDetail.carManage import search_user
+# from admin.carDetail.carManage import search_user
 class customer:
     def __init__(self, choice, data):
         self.choice = choice
@@ -49,12 +49,15 @@ class customer:
             print(f"Error: {message}")
     def bookedCars(self):
         myCar = view_cars()
+        available = []
         # print(myCar)
         if len(myCar) > 0:
             for myCars in myCar:
                 if myCars[9] == str(self.__userId):
                     print(myCars)
-                else:
+                    available.append(myCars)
+                    print(f"The price of {myCars[1]} is: {int(myCars[10]) * 2000} for {myCars[10]} days")
+            if available==[]:
                     print("You didn't book any car")
         else:
                     print("You didn't book any car")
@@ -94,6 +97,7 @@ def customerChoice(data):
                     if cars[4].lower() == "yes":
                         print(cars)
                         availableCar.append(cars)
+                        # print(f"The price for this car is: Rs. {}")
                         # print(f"I am availableCar: {availableCar}")
                         # customerChoice.carBooking(data)
                 if availableCar==[]:
