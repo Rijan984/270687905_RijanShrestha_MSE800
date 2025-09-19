@@ -1,6 +1,6 @@
 from userManage.userManage import view_users, delete_user
-from admin.carDetail.car import addCarDetail, viewCars, deleteCar
-from admin.carDetail.carManage import view_cars, update_car, approveCarRent
+from admin.carDetail.car import addCarDetail, viewCars
+from admin.carDetail.carManage import view_cars, update_car, approveCarRent, delete_car
 
 
 def validation(confirmation, userId):
@@ -56,7 +56,7 @@ def aprove_car_rent(data):
         car = view_cars()
         carAvailable = False
         if len(car) < 1:
-            print("No car available")
+            print("No any request for booking")
         else:
             for carData in car:
                 # if carData[8]==data[0]:
@@ -64,10 +64,10 @@ def aprove_car_rent(data):
                     print(carData)
                     carAvailable = True
                     # acceptCarRent()
-        if carAvailable == True:
-            acceptCarRent()
-        else:
-            print("No any request for booking")
+            if carAvailable == True:
+                acceptCarRent()
+            else:
+                print("No any request for booking")
 
         
 
@@ -96,6 +96,26 @@ def updateCar():
     #     update_car()
 
 # class deleteUsers:
+
+def deleteCar(adminCar, data):
+    viewCars()
+    carId = input("Please enter car ID you want to delete: ")
+    deleteCar = True
+    if len(carId) > 0:
+        if any(char.isalpha() for char in carId):
+            print("❌ Please enter only numbers")
+        else:
+            for car in adminCar:
+                if car[0] == int(carId):
+                    delete_car(carId) #passing ID to delete car from database
+                else:
+                    deleteCar = False
+    if not deleteCar:
+        print("You dont have any car to delete")
+
+    else:
+        print("❌ Please enter car ID to delete: ")
+
 def menuSelelction(data):
     print(f"Welcome {data[1].capitalize()}")
     print("1. Add Cars")
@@ -130,7 +150,17 @@ def adminMenu(data):
                         print(carData)
         elif selectMenu == "3":
             print("-----Deleting Car-----")
-            deleteCar() 
+            car = view_cars()
+            adminCar = []
+            for carData in car:
+                if carData[8]==data[0]:
+                    adminCar.append(carData)
+                    print(f"i am called: {adminCar}")
+            if len(adminCar) != []:
+                deleteCar(adminCar, data)
+            else:
+                print("You dont have any car to delete")
+            # deleteCar() 
         elif selectMenu == "4":
             aprove_car_rent(data)
         elif selectMenu == "5":

@@ -101,10 +101,18 @@ def view_cars():
     # else:
     #     print("-----No Car Aavailable-----")
 
+def search_user(car_id):
+    conn = create_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM users WHERE name LIKE ?", ('%' + car_id + '%',))
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
 def delete_car(car_id):
     conn = create_connection()
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM carDetails WHERE car_id = ?", (car_id,))
+    cursor.execute("DELETE FROM carDetails WHERE car_id = ?", (car_id))
     if cursor.rowcount == 0:   # ✅ no rows affected means ID not found
         print("❌ No car found with that ID.")
     else:

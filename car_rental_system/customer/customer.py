@@ -1,6 +1,8 @@
 from admin.carDetail.carManage import view_cars
 from customer.customerManage import bookCar_customer, cancel_booking
 # from admin.carDetail.carManage import search_user
+
+booked_cars = []
 class customer:
     def __init__(self, choice, data):
         self.choice = choice
@@ -36,12 +38,21 @@ class customer:
         if duration.isdigit() == False:
             return False, "❌ Please enter number only"
         return True, "Successfully validate"
+    def cancleBookingValidation(confirmation, car_id):
+        if confirmation not in ("y", "n", "Y", "N", "Yes", "No", "yes", "no", "YES", "NO"):
+            return False, "Please enter Yes/No"
+        if confirmation == ("n", "no", "No", "NO"):
+            return False, "Exiting..."
+        if not car_id:
+            return False, "Please enter car ID"
+        if car_id.isdigit() == False:
+            return False, "❌ Please enter number only"
+        return True, "Successfully validate"
     
     def carBooking(self, data):
         car_id = input("Please enter the id of car you want to book: ")
         rentDuration = input("For howmany days you want to rent a car: ")
         confirmation = input("Are you sure (y/n): ")
-        # if car_id
         is_valid, message = customer.validation(confirmation, car_id, rentDuration) ## storing message and boolean
         if is_valid:
             bookCar_customer(data, car_id, rentDuration)
@@ -50,24 +61,39 @@ class customer:
     def bookedCars(self):
         myCar = view_cars()
         available = []
+        booked_cars = []
         # print(myCar)
         if len(myCar) > 0:
             for myCars in myCar:
                 if myCars[9] == str(self.__userId):
                     print(myCars)
                     available.append(myCars)
+                    booked_cars.append(myCars)
                     print(f"The price of {myCars[1]} is: {int(myCars[10]) * 2000} for {myCars[10]} days")
             if available==[]:
                     print("You didn't book any car")
         else:
                     print("You didn't book any car")
     def cancelBooking(self):
+        customer.bookedCars(self)
         carId = input("To cancel booking please enter car id: ")
         confirmation = input("Are you sure you want to cancel(y/n): ")
 
-        is_valid, message = customer.validation(confirmation, carId)
+        is_valid, message = customer.cancleBookingValidation(confirmation, carId)
         if is_valid:
-            cancel_booking(carId)
+            bookingCancle = True
+            if booked_cars!=[]:
+                for cars in booked_cars:
+                    if booked_cars[0] == int(carId):
+                        print(f"I am booked cars: {cars}")
+                        cancel_booking(carId)
+                    else:
+                        bookingCancle == False
+                if bookingCancle == False:
+                    print("No any cars are booked to cancel")
+
+            else:
+                print("No any cars are booked")
         else:
             print(f"Error: {message}")
 
@@ -108,10 +134,10 @@ def customerChoice(data):
             else:
                 print("No any car available for booking")
         elif choice == "3":
-            print("cancel booking")
+            print("----- Cancel Booking -----")
             customerChoice.cancelBooking()
         elif choice == "4":
-            print("View Booked Car")
+            print("----- View Booked Car -----")
             customerChoice.bookedCars()
         elif choice == "5":
             break

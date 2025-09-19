@@ -1,5 +1,6 @@
 from userManage.userManage import view_users, delete_user
 from admin.carDetail.car import addCarDetail, viewCars, deleteCar
+from admin.carDetail.carManage import view_cars
 
 def viewUser():
     userdata = view_users()
@@ -64,11 +65,13 @@ def superAdminMenu():
             deleteUser()
         elif selectMenu == "3":
             print("-----Car Details-----")
-            carData = viewCars()
+            carData = view_cars()
+            
             if carData == None:
                 print("No car available")
             else:
-                print(carData)
+                for cars in carData:
+                    print(cars)
         elif selectMenu == "4":
             print("-----Deleting Car-----")
             deleteCar()
