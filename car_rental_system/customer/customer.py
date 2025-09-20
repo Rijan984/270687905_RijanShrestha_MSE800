@@ -2,7 +2,7 @@ from admin.carDetail.carManage import view_cars
 from customer.customerManage import bookCar_customer, cancel_booking
 # from admin.carDetail.carManage import search_user
 
-booked_cars = []
+availableCars = []
 class customer:
     def __init__(self, choice, data):
         self.choice = choice
@@ -61,41 +61,51 @@ class customer:
     def bookedCars(self):
         myCar = view_cars()
         available = []
-        booked_cars = []
+        # booked_cars = []
         # print(myCar)
         if len(myCar) > 0:
             for myCars in myCar:
                 if myCars[9] == str(self.__userId):
                     print(myCars)
                     available.append(myCars)
-                    booked_cars.append(myCars)
                     print(f"The price of {myCars[1]} is: {int(myCars[10]) * 2000} for {myCars[10]} days")
             if available==[]:
                     print("You didn't book any car")
         else:
                     print("You didn't book any car")
     def cancelBooking(self):
-        customer.bookedCars(self)
-        carId = input("To cancel booking please enter car id: ")
-        confirmation = input("Are you sure you want to cancel(y/n): ")
+        myCar = view_cars()
+        available = []
+        # booked_cars = []
+        # print(myCar)
+        if len(myCar) > 0:
+            for myCars in myCar:
+                if myCars[9] == str(self.__userId):
+                    available.append(myCars)
+            if len(available)>0:
+                if available!=[]:
+                    print(available)
+                carId = input("To cancel booking please enter car id: ")
+                confirmation = input("Are you sure you want to cancel(y/n): ")
 
-        is_valid, message = customer.cancleBookingValidation(confirmation, carId)
-        if is_valid:
-            bookingCancle = True
-            if booked_cars!=[]:
-                for cars in booked_cars:
-                    if booked_cars[0] == int(carId):
-                        print(f"I am booked cars: {cars}")
-                        cancel_booking(carId)
+                is_valid, message = customer.cancleBookingValidation(confirmation, carId)
+                if is_valid:
+                    bookingCancle = ""
+                    if available!=[]:
+                        print("Hey")
+                        for cars in available:
+                            print(cars)
+                            if cars[0] == int(carId):
+                                cancel_booking(carId) #will cancel the booking and update the status in database from pending or approved to available
+                            else:
+                                bookingCancle == False
+                                if not bookingCancle:
+                                    print("No any car found to cancel")
+
                     else:
-                        bookingCancle == False
-                if bookingCancle == False:
-                    print("No any cars are booked to cancel")
-
-            else:
-                print("No any cars are booked")
-        else:
-            print(f"Error: {message}")
+                        print("No any cars are booked")
+                else:
+                    print(f"Error: {message}")
 
 
 def customerMenu(data):
