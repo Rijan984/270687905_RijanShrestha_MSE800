@@ -8,7 +8,7 @@ def viewUser():
         print("No any user found")
     else:
          for user in userdata:
-            print(f"i am called: {user}")
+            print(f"{user}")
 
 def validation(confirmation, userId):
         if confirmation not in ("y", "n", "Y", "N", "Yes", "No"):
@@ -29,7 +29,7 @@ def deleteUser():
     userId = input("Please enter user ID of user you want to delete: ")
     confirmation = input("Are you sure(y/n): ")
     ## authentication for confirmation
-    print(userId)
+    # print(userId)
     # validation(confirmation)
     
     is_valid, message = validation(confirmation, userId) ## storing message and boolean

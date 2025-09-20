@@ -155,7 +155,7 @@ def adminMenu(data):
             for carData in car:
                 if carData[8]==data[0]:
                     adminCar.append(carData)
-                    print(f"i am called: {adminCar}")
+                    print(f"{carData}")
             if len(adminCar) != []:
                 deleteCar(adminCar, data)
             else:
